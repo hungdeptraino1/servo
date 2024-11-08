@@ -37,7 +37,7 @@ void setup() {
   // Gắn servo 1 vào chân 9 và servo 2 vào chân 10
   myservo1.attach(9); 
   myservo2.attach(10); 
-  myservo2.attach(11);
+  myservo3.attach(11);
   // Khởi động Serial Monitor với tốc độ 9600 bps
   Serial.begin(9600);
 }

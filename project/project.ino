@@ -13,8 +13,9 @@ unsigned long greenFrequency = 0;
 unsigned long blueFrequency = 0;
 
 // Tạo đối tượng servo
-Servo myservo1;  // Servo 1 (hoạt động khi nhận tín hiệu xanh lá)
-Servo myservo2;  // Servo 2 (hoạt động khi nhận tín hiệu xanh dương)
+Servo myservo1;  
+Servo myservo2;  
+Servo myservo3;
 
 // Khai báo hàm normalize
 int normalize(int value, int maxValue);
@@ -36,7 +37,7 @@ void setup() {
   // Gắn servo 1 vào chân 9 và servo 2 vào chân 10
   myservo1.attach(9); 
   myservo2.attach(10); 
-
+  myservo3.attach(11);
   // Khởi động Serial Monitor với tốc độ 9600 bps
   Serial.begin(9600);
 }
@@ -137,6 +138,9 @@ void loop() {
   // Tạm dừng trước lần đọc tiếp theo
   delay(1000);
 }
+
+
+
 
 // Định nghĩa hàm normalize
 int normalize(int value, int maxValue) {
