@@ -79,7 +79,6 @@ void loop() {
   Serial.print(" | Blue: ");
   Serial.println(blueValue);
 
-
   //servo phan loai xem co phai rac ko (cho 2 if phân loại màu nóng và lạnh bên dưới vào vòng if này khi servo3 quay thì tiếp đến 2 servo còn lại)
   if(redValue >= 0){
     myservo3.write(110);
@@ -98,11 +97,9 @@ void loop() {
     delay(150);
     myservo2.write(0);
   }
-
+  // Tạm dừng trước lần đọc tiếp theo
   delay(1000);
 }
-
-
 
 // Định nghĩa hàm normalize
 int normalize(int value, int maxValue) {
