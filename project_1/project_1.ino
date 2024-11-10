@@ -34,10 +34,11 @@ void setup() {
   digitalWrite(S0, HIGH);
   digitalWrite(S1, LOW);
 
-  // Gắn servo 1 vào chân 9 và servo 2 vào chân 10
+  // Gắn servo 1 vào chân 9, servo 2 vào chân 10 và servo 3 vào chân 11
   myservo1.attach(9); 
   myservo2.attach(10); 
   myservo3.attach(11);
+
   // Khởi động Serial Monitor với tốc độ 9600 bps
   Serial.begin(9600);
 }
@@ -79,25 +80,30 @@ void loop() {
   Serial.print(" | Blue: ");
   Serial.println(blueValue);
 
-  //servo phan loai xem co phai rac ko (cho 2 if phân loại màu nóng và lạnh bên dưới vào vòng if này khi servo3 quay thì tiếp đến 2 servo còn lại)
-  if(redValue >= 0){
-    myservo3.write(110);
-    delay(150);
-    myservo3.write(0);
+  // Kiểm tra lệnh từ Python để điều khiển servo3
+  if (Serial.available() > 0) {
+    int command = Serial.read();  // Đọc lệnh từ Python
+    if (command == '1') {
+      myservo3.write(110);  // Quay servo3 tới 110 độ
+      delay(150);
+      myservo3.write(0);    // Quay về 0 độ
+    }
   }
-  //mau nong
-  if(200 <= redValue <= 255 &&  0 <= greenValue <= 200 && 0 <= blueValue <= 100){
+
+  // Phân loại màu nóng
+  if (redValue >= 200 && redValue <= 255 && greenValue >= 0 && greenValue <= 200 && blueValue >= 0 && blueValue <= 100) {
     myservo1.write(110);
     delay(150);
     myservo1.write(0);
   }
-  //mau lanh
-  if(0 <= redValue <= 200 &&  0 <= greenValue <= 255 && 0 <= blueValue <= 255){
+
+  // Phân loại màu lạnh
+  if (redValue >= 0 && redValue <= 200 && greenValue >= 0 && greenValue <= 255 && blueValue >= 0 && blueValue <= 255) {
     myservo2.write(110);
     delay(150);
     myservo2.write(0);
   }
-  // Tạm dừng trước lần đọc tiếp theo
+// Tạm dừng trước lần đọc tiếp theo
   delay(1000);
 }
 
